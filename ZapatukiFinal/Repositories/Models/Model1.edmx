@@ -50,7 +50,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -310,7 +310,7 @@
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="CARTs" Relationship="Self.FK_CART_PERSON" FromRole="PERSON" ToRole="CART" />
           <NavigationProperty Name="CITY" Relationship="Self.FK_PERSON_CITY" FromRole="PERSON" ToRole="CITY" />
           <NavigationProperty Name="ROLE" Relationship="Self.FK_PERSON_ROLE" FromRole="PERSON" ToRole="ROLE" />
@@ -476,7 +476,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ZAPATUKIEntities9" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ZAPATUKIEntities11" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CARTs" EntityType="Self.CART" />
           <EntitySet Name="CART_STATE" EntityType="Self.CART_STATE" />
           <EntitySet Name="CITies" EntityType="Self.CITY" />
@@ -529,7 +529,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ZAPATUKIModelStoreContainer" CdmEntityContainer="ZAPATUKIEntities9">
+        <EntityContainerMapping StorageEntityContainer="ZAPATUKIModelStoreContainer" CdmEntityContainer="ZAPATUKIEntities11">
           <EntitySetMapping Name="CARTs">
             <EntityTypeMapping TypeName="ZAPATUKIModel.CART">
               <MappingFragment StoreEntitySet="CART">
