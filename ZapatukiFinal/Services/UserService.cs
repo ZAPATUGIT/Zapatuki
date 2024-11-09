@@ -22,6 +22,32 @@ namespace ZapatukiFinal.Services
             return _userRepo.GetCities().ToList();
         }
 
+        public ResponseDto Login(UserDto userDto)
+        {
+            ResponseDto response = new ResponseDto();
+
+            if (!_userRepo.UserExists(userDto.Email))
+            {
+                response.type = 0;
+                response.message = "User doesn´t exist";
+            }
+            else
+            {
+                bool isValidPassword = _userRepo.validatePassword(userDto.Email, userDto.Password);
+                if (isValidPassword)
+                {
+                    response.type = 1;
+                    response.message = "Login successfull";
+                } else
+                {
+                    response.type = 0;
+                    response.message = "Invalid Password";
+                }
+            }
+
+            return response;
+        }
+
         public ResponseDto UserRegistration(UserDto userDto)
         {
             PERSON pERSON = new PERSON
@@ -33,7 +59,7 @@ namespace ZapatukiFinal.Services
                 DocumentNumber = userDto.DocumentNumber,
                 Phone = userDto.Phone,
                 Email = userDto.Email,
-                Password = userDto.Password,
+                Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password),
                 IdRole =userDto.IdRole
             };
             ResponseDto response = new ResponseDto();
@@ -42,19 +68,19 @@ namespace ZapatukiFinal.Services
                 if (_userRepo.UserExists(userDto.Email))
                 {
                     response.type = 0;
-                    response.message = "El usuario ya existe";
+                    response.message = "User doesn´t exist";
                 }
                 else
                 {
                     if (_userRepo.UserRegistration(pERSON))
                     {
                         response.type = 1;
-                        response.message = "Creado con exito";
+                        response.message = "User created";
                     }
                     else
                     {
                         response.type = 0;
-                        response.message = "Algo pasó";
+                        response.message = "Something goes wrong";
                     }
                 }
                 return response;

@@ -10,7 +10,7 @@
 @using (Html.BeginForm("UserRegistration", "User", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <!-- Formulario 1: Selección de Departamento -->
+
     <div class="form-group">
         <label for="citiesSelect">Seleccionar Ciudad:</label>
         <select id="citiesSelect" name="User.IdCity" class="form-control">
