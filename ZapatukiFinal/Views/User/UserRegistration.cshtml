@@ -1,0 +1,99 @@
+﻿@model ZapatukiFinal.Dtos.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "User Registration";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h4>User Registration</h4>
+<hr />
+@using (Html.BeginForm("UserRegistration", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <!-- Formulario 1: Selección de Departamento -->
+    <div class="form-group">
+        <label for="citiesSelect">Seleccionar Ciudad:</label>
+        <select id="citiesSelect" name="User.IdCity" class="form-control">
+            <option value="">Seleccione una ciudad</option>
+            @foreach (var city in Model.Cities)
+            {
+                <option value="@city.IdCity" @(Model.User.IdCity == city.IdCity ? "selected" : "")>
+                    @city.NameCity
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.DocumentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.DocumentNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.DocumentNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Crear" class="button" />
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.Response.message))
+{
+    <div class="alert alert-danger">
+        @Model.Response.message
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to the menu", "Index", "Home")
+</div>
