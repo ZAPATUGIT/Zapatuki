@@ -31,7 +31,14 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
-
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+        public ActionResult NewPassword()
+        {
+            return View();
+        }
         public ActionResult UserRegistration()
         {
             // Cargar ciudades para la vista inicial
@@ -101,18 +108,56 @@ namespace ZapatukiFinal.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult ForgetPassword(UserDto user)
+        {
+            try
+            {
+                ResponseDto response = _userService.ForgetPassword(user);
+                if (response.type == 1)
+                {
+                    return RedirectToAction("Login", "User"); // Redirigir al login en caso de éxito
+                }
+                else
+                {
+                    return createForgetPasswrodViewModel(user, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseDto
+                {
+                    type = 0,
+                    message = ex.Message
+                };
+                return createForgetPasswrodViewModel(user, response);
+            }
+
+        }
+
+        private ActionResult createForgetPasswrodViewModel(UserDto user,ResponseDto response)
+        {
+            var viewModel = new UserViewModel
+            {
+                User = new UserDto(),
+                Response = response ?? new ResponseDto()
+            };
+            return View(viewModel);
+        }
+
         private ActionResult createLoginViewModel(UserDto user, ResponseDto response)
         {
             var viewModel = new UserViewModel
             {
                 User = new UserDto(),
-                Response = new ResponseDto()
+                Response = response ?? new ResponseDto()
             };
             return View(viewModel);
         }
+
         private ActionResult CreateUserViewModel(UserDto user, ResponseDto response = null)
         {
-            var cities = _userService.GetCities().ToList(); // Solo obtener ciudades
+            var cities = _userService.GetCities().ToList();
 
             var viewModel = new UserViewModel
             {

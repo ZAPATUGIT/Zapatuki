@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ZapatukiFinal.Repositories.Models;
 using BCrypt.Net;
+using System.Web.Helpers;
+using ZapatukiFinal.Dtos;
 
 namespace ZapatukiFinal.Repositories
 {
@@ -47,5 +49,24 @@ namespace ZapatukiFinal.Repositories
             return BCrypt.Net.BCrypt.Verify(password, user.Password);
         }
 
+        public bool UpdatePassword(string email, string newPassword)
+        {
+            try
+            {
+                    var person = _db.People.FirstOrDefault(p => p.Email == email);
+                    person.Password = newPassword;
+                    _db.SaveChanges();
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool validateDocument(string documentNumber, string email)
+        {
+            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email);
+        }
     }
 }
