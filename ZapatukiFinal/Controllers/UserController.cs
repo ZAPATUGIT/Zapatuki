@@ -31,7 +31,14 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
-
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+        public ActionResult NewPassword()
+        {
+            return View();
+        }
         public ActionResult UserRegistration()
         {
             // Cargar ciudades para la vista inicial
@@ -46,25 +53,6 @@ namespace ZapatukiFinal.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoadCities()
-        {
-            var cities = new List<CITY>();
-
-            cities = _userService.GetCities().ToList();
-
-            var viewModel = new UserViewModel
-            {
-                Response = new ResponseDto
-                {
-                    Cities = cities
-                }
-            };
-
-            return View("UserRegistration", viewModel);
-        }
-
-
-        [HttpPost]
         public ActionResult UserRegistration(UserDto user)
         {
             try
@@ -74,7 +62,7 @@ namespace ZapatukiFinal.Controllers
 
                 if (response.type == 1)
                 {
-                    return RedirectToAction("Login"); // Redirigir al login en caso de éxito
+                    return RedirectToAction("Login","User"); // Redirigir al login en caso de éxito
                 }
                 else
                 {
@@ -92,9 +80,84 @@ namespace ZapatukiFinal.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Login(UserDto user)
+        {
+            try
+            {
+                ResponseDto response = _userService.Login(user);
+
+                if (response.type == 1)
+                {
+                    return RedirectToAction("Index","Home"); // Redirigir al Home en caso de éxito
+                }
+                else
+                {
+                    return createLoginViewModel(user, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseDto
+                {
+                    type = 0,
+                    message = ex.Message
+                };
+                return createLoginViewModel(user, response);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(UserDto user)
+        {
+            try
+            {
+                ResponseDto response = _userService.ForgetPassword(user);
+                if (response.type == 1)
+                {
+                    return RedirectToAction("Login", "User"); // Redirigir al login en caso de éxito
+                }
+                else
+                {
+                    return createForgetPasswrodViewModel(user, response);
+                }
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseDto
+                {
+                    type = 0,
+                    message = ex.Message
+                };
+                return createForgetPasswrodViewModel(user, response);
+            }
+
+        }
+
+        private ActionResult createForgetPasswrodViewModel(UserDto user,ResponseDto response)
+        {
+            var viewModel = new UserViewModel
+            {
+                User = new UserDto(),
+                Response = response ?? new ResponseDto()
+            };
+            return View(viewModel);
+        }
+
+        private ActionResult createLoginViewModel(UserDto user, ResponseDto response)
+        {
+            var viewModel = new UserViewModel
+            {
+                User = new UserDto(),
+                Response = response ?? new ResponseDto()
+            };
+            return View(viewModel);
+        }
+
         private ActionResult CreateUserViewModel(UserDto user, ResponseDto response = null)
         {
-            var cities = _userService.GetCities().ToList(); // Solo obtener ciudades
+            var cities = _userService.GetCities().ToList();
 
             var viewModel = new UserViewModel
             {

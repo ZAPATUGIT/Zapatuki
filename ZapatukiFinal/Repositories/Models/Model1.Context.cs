@@ -13,10 +13,10 @@ namespace ZapatukiFinal.Repositories.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ZAPATUKIEntities9 : DbContext
+    public partial class ZAPATUKIEntities11 : DbContext
     {
-        public ZAPATUKIEntities9()
-            : base("name=ZAPATUKIEntities9")
+        public ZAPATUKIEntities11()
+            : base("name=ZAPATUKIEntities11")
         {
         }
     

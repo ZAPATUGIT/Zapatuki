@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using System.Web;
-using ZapatukiFinal.Dtos;
 using ZapatukiFinal.Repositories.Models;
+using BCrypt.Net;
+using System.Web.Helpers;
+using ZapatukiFinal.Dtos;
 
 namespace ZapatukiFinal.Repositories
 {
     public class UserRepository
     {
-        private readonly ZAPATUKIEntities9 _db;
+        private readonly ZAPATUKIEntities11 _db;
 
         public UserRepository() {
-            _db = new ZAPATUKIEntities9();
+            _db = new ZAPATUKIEntities11();
         }
 
         public IEnumerable<CITY> GetCities()
@@ -44,5 +43,30 @@ namespace ZapatukiFinal.Repositories
             return _db.People.Any(u => u.Email == email);
         }
 
+        public bool validatePassword(string email, string password)
+        {
+            PERSON user = _db.People.FirstOrDefault(u => u.Email == email);
+            return BCrypt.Net.BCrypt.Verify(password, user.Password);
+        }
+
+        public bool UpdatePassword(string email, string newPassword)
+        {
+            try
+            {
+                    var person = _db.People.FirstOrDefault(p => p.Email == email);
+                    person.Password = newPassword;
+                    _db.SaveChanges();
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool validateDocument(string documentNumber, string email)
+        {
+            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email);
+        }
     }
 }

@@ -33,8 +33,8 @@ namespace ZapatukiFinal.Services
                 DocumentNumber = userDto.DocumentNumber,
                 Phone = userDto.Phone,
                 Email = userDto.Email,
-                Password = userDto.Password,
-                IdRole =userDto.IdRole
+                Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password),
+                IdRole = userDto.IdRole
             };
             ResponseDto response = new ResponseDto();
             try
@@ -42,28 +42,103 @@ namespace ZapatukiFinal.Services
                 if (_userRepo.UserExists(userDto.Email))
                 {
                     response.type = 0;
-                    response.message = "El usuario ya existe";
+                    response.message = "User exist";
                 }
                 else
                 {
                     if (_userRepo.UserRegistration(pERSON))
                     {
                         response.type = 1;
-                        response.message = "Creado con exito";
+                        response.message = "User created";
                     }
                     else
                     {
                         response.type = 0;
-                        response.message = "Algo pasó";
+                        response.message = "Something goes wrong";
+                    }
+                }
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.type = 0;
+                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
+                return response;
+            }
+        }
+
+        public ResponseDto Login(UserDto userDto)
+        {
+            ResponseDto response = new ResponseDto();
+            try 
+            { 
+                if (!_userRepo.UserExists(userDto.Email))
+                {
+                    response.type = 0;
+                    response.message = "User doesn´t exist";
+                }
+                else
+                {
+                    bool isValidPassword = _userRepo.validatePassword(userDto.Email, userDto.Password);
+                    if (isValidPassword)
+                    {
+                        response.type = 1;
+                        response.message = "Login successfull";
+                    } else
+                    {
+                        response.type = 0;
+                        response.message = "Invalid Password";
+                    }
+                }
+                return response; 
+            }
+            catch (Exception e) {
+                response.type = 0;
+                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
+                return response;
+            }
+        }
+        public ResponseDto ForgetPassword(UserDto userDto)
+        {
+            ResponseDto response = new ResponseDto();
+            try
+            {
+                if (!_userRepo.validateDocument(userDto.DocumentNumber, userDto.Email))
+                {
+                    response.type = 0;
+                    response.message = "User doesn´t exist or data doesn´t correspond";
+                }
+                else
+                {
+                    if (userDto.NewPassword != userDto.ConfirmPassword)
+                    {
+                        response.type = 0;
+                        response.message = "Passwords do not match";
+                    }
+                    else
+                    {;
+                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.NewPassword);
+                        bool updateResult = _userRepo.UpdatePassword(userDto.Email, hashedPassword);
+
+                        if (updateResult)
+                        {
+                            response.type = 1;
+                            response.message = "Password updated successfully";
+                        }
+                        else
+                        {
+                            response.type = 0;
+                            response.message = "Failed to update the password";
+                        }
                     }
                 }
                 return response;
             }
             catch (Exception e) {
                 response.type = 0;
-                response.message = e.InnerException !=null ? e.InnerException.ToString(): e.Message;
+                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
                 return response;
-            }
+                }
         }
     }
 }
