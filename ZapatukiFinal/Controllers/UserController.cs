@@ -39,6 +39,8 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
+
+        [HttpGet]
         public ActionResult UserRegistration()
         {
             // Cargar ciudades para la vista inicial
@@ -48,6 +50,30 @@ namespace ZapatukiFinal.Controllers
                 User = new UserDto(),
                 Response = new ResponseDto(),
                 Cities = cities // Cargar solo ciudades
+            };
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult login()
+        {
+            // Cargar para la vista inicial
+            var viewModel = new UserViewModel
+            {
+                User = new UserDto(),
+                Response = new ResponseDto(),
+            };
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult forgetPassword()
+        {
+            // Cargar para la vista inicial
+            var viewModel = new UserViewModel
+            {
+                User = new UserDto(),
+                Response = new ResponseDto(),
             };
             return View(viewModel);
         }
@@ -135,30 +161,9 @@ namespace ZapatukiFinal.Controllers
 
         }
 
-        private ActionResult createForgetPasswrodViewModel(UserDto user,ResponseDto response)
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = response ?? new ResponseDto()
-            };
-            return View(viewModel);
-        }
-
-        private ActionResult createLoginViewModel(UserDto user, ResponseDto response)
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = response ?? new ResponseDto()
-            };
-            return View(viewModel);
-        }
-
         private ActionResult CreateUserViewModel(UserDto user, ResponseDto response = null)
         {
             var cities = _userService.GetCities().ToList();
-
             var viewModel = new UserViewModel
             {
                 User = user,
@@ -168,5 +173,28 @@ namespace ZapatukiFinal.Controllers
 
             return View(viewModel);
         }
+
+        private ActionResult createLoginViewModel(UserDto user, ResponseDto response = null)
+        {
+            var viewModel = new UserViewModel
+            {
+                User = user,
+                Response = response ?? new ResponseDto()
+            };
+            return View(viewModel);
+        }
+
+        private ActionResult createForgetPasswrodViewModel(UserDto user,ResponseDto response = null)
+        {
+            var viewModel = new UserViewModel
+            {
+                User = user,
+                Response = response ?? new ResponseDto()
+            };
+            return View(viewModel);
+        }
+
+
+
     }
 }

@@ -1,11 +1,12 @@
 ﻿@model ZapatukiFinal.Dtos.ViewModels.UserViewModel
+
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
 <h2>Login</h2>
-
+<hr />
 @using (Html.BeginForm("Login", "User", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -31,15 +32,21 @@
             <input type="submit" value="Login" class="button" />
         </div>
     </div>
+
+    <button data-label="ForgetPasword" class="rainbow-hover">
+        @Html.ActionLink("Sign Up", "UserRegistration", "User", new { area = "" }, new { @class = "nav-link" })
+    </button>
+    <button data-label="ForgetPasword" class="rainbow-hover">
+        @Html.ActionLink("Forget Password", "ForgetPassword", "User", new { area = "" }, new { @class = "nav-link" })
+    </button>
+    <button data-label="ForgetPasword" class="rainbow-hover">
+        @Html.ActionLink("Back to Home", "Home", "User", new { area = "" }, new { @class = "nav-link" })
+    </button>
 }
-<button data-label="ForgetPasword" class="rainbow-hover">
-    @Html.ActionLink("Sign Up", "UserRegistration", "User", new { area = "" }, new { @class = "nav-link" })
-</button>
-<button data-label="ForgetPasword" class="rainbow-hover">
-    @Html.ActionLink("Forget Password", "ForgetPassword", "User", new { area = "" }, new { @class = "nav-link" })
-</button>
-<button data-label="ForgetPasword" class="rainbow-hover">
-    @Html.ActionLink("Back to Home", "Home", "User", new { area = "" }, new { @class = "nav-link" })
-</button>
 
-
+@if (!string.IsNullOrEmpty(Model.Response.message))
+{
+    <div class="alert alert-danger">
+        @Model.Response.message
+    </div>
+}

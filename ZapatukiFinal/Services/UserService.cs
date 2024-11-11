@@ -24,7 +24,10 @@ namespace ZapatukiFinal.Services
 
         public ResponseDto UserRegistration(UserDto userDto)
         {
-            PERSON pERSON = new PERSON
+            ResponseDto response = new ResponseDto();
+            try
+            {
+                PERSON pERSON = new PERSON
             {
                 IdCity = userDto.IdCity,
                 Address = userDto.Address,
@@ -36,9 +39,6 @@ namespace ZapatukiFinal.Services
                 Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password),
                 IdRole = userDto.IdRole
             };
-            ResponseDto response = new ResponseDto();
-            try
-            {
                 if (_userRepo.UserExists(userDto.Email))
                 {
                     response.type = 0;
@@ -67,20 +67,20 @@ namespace ZapatukiFinal.Services
             }
         }
 
-        public ResponseDto Login(UserDto userDto)
+        public ResponseDto Login(UserDto user)
         {
             ResponseDto response = new ResponseDto();
             try 
             { 
-                if (!_userRepo.UserExists(userDto.Email))
+                if (!_userRepo.UserExists(user.Email))
                 {
                     response.type = 0;
                     response.message = "User doesn´t exist";
                 }
                 else
                 {
-                    bool isValidPassword = _userRepo.validatePassword(userDto.Email, userDto.Password);
-                    if (isValidPassword)
+                     
+                    if (_userRepo.validatePassword(user.Email, user.Password))
                     {
                         response.type = 1;
                         response.message = "Login successfull";
