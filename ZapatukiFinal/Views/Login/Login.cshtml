@@ -7,7 +7,7 @@
 
 <h2>Login</h2>
 <hr />
-@using (Html.BeginForm("Login", "User", FormMethod.Post))
+@using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -33,14 +33,14 @@
         </div>
     </div>
 
-    <button data-label="ForgetPasword" class="rainbow-hover">
+    <button data-label="UserRegistration" class="rainbow-hover">
         @Html.ActionLink("Sign Up", "UserRegistration", "User", new { area = "" }, new { @class = "nav-link" })
     </button>
     <button data-label="ForgetPasword" class="rainbow-hover">
-        @Html.ActionLink("Forget Password", "ForgetPassword", "User", new { area = "" }, new { @class = "nav-link" })
+        @Html.ActionLink("Forget Password", "ForgetPassword", "Login", new { area = "" }, new { @class = "nav-link" })
     </button>
-    <button data-label="ForgetPasword" class="rainbow-hover">
-        @Html.ActionLink("Back to Home", "Home", "User", new { area = "" }, new { @class = "nav-link" })
+    <button data-label="BackToHome" class="rainbow-hover">
+        @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
     </button>
 }
 

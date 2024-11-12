@@ -52,15 +52,9 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">@Html.ActionLink("Categories", "Categories", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Offer", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Latest", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Accessories", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Login", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li class="nav-item">
-                        <div class="search-container">
-                            <input type="text" class="search-bar" placeholder="Busca en la tienda">
-                            <i class="fas fa-search search-icon"></i>
-                        </div>
+                    <li class="nav-item">@Html.ActionLink("Offers", "Offers", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Shopping cart", "Cart", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                     </li>
                 </ul>
             </div>

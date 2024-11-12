@@ -85,6 +85,10 @@
             <input type="submit" value="Crear" class="button" />
         </div>
     </div>
+
+    <button data-label="ForgetPasword" class="rainbow-hover">
+        @Html.ActionLink("Back to Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+    </button>
 }
 
 @if (!string.IsNullOrEmpty(Model.Response.message))

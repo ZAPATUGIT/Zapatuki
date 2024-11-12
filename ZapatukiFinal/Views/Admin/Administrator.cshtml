@@ -1,0 +1,34 @@
+﻿@model ZapatukiFinal.Dtos.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "Administrator";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Administrator</h2>
+@if (Session["UserLogged"] == null)
+{
+    <div class="alert alert-danger">You are not logged</div>
+
+    <button data-label="Login" class="rainbow-hover">
+        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+    </button>
+}
+else
+{
+    if (Model.Response != null && Model.Response.Data != null)
+    {
+        if (Model.Response.Data.IdRole == 3)
+        {
+            <div class="alert alert-success">Successful Login Admin</div>
+            <div class="alert alert-danger">Aquí podrás generar tus reportes</div>
+        }
+        else
+        {
+            <div class="alert alert-danger">You don´t have administrator permissions to access</div>
+        }
+    }
+}
+<button data-label="BackToHome" class="rainbow-hover">
+    @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+</button>

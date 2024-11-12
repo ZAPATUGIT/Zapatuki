@@ -12,5 +12,6 @@ namespace ZapatukiFinal.Dtos
         public IEnumerable<CITY> Cities { get; set; } // Lista de ciudades según el departamento seleccionado
         public int type {  get; set; }
         public string message { get; set; }
+        public UserDto Data { get; set; }
     }
 }
