@@ -288,6 +288,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\Suppliers.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -307,6 +309,8 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="wwwroot\images\banner1.jpg" />
+    <Content Include="wwwroot\images\zapas1.png" />
     <EntityDeploy Include="Repositories\Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -325,6 +329,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="wwwroot\images\banner.jpg" />
+    <Content Include="wwwroot\images\banner2.jpg" />
+    <Content Include="wwwroot\images\ganner 1.jpeg" />
     <Content Include="wwwroot\images\iconlogin.png" />
     <Content Include="wwwroot\images\logozapatuki.png" />
     <Content Include="wwwroot\images\zapas.jpg" />
@@ -377,6 +383,7 @@
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Admin\Administrator.cshtml" />
     <Content Include="Views\Seller\Seller.cshtml" />
+    <Content Include="Views\Home\Suppliers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

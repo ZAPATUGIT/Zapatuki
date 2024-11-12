@@ -12,11 +12,11 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
-        public ActionResult Categories()
+        public ActionResult Offers()
         {
             return View();
         }
-        public ActionResult Offers()
+        public ActionResult Categories()
         {
             return View();
         }
@@ -32,6 +32,13 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
+
+        public ActionResult Suppliers() 
+        {
+            return View();
+        }
+        
+
         //[HttpGet]
         //public ActionResult Logout()
         //{
