@@ -11,6 +11,7 @@ namespace ZapatukiFinal.Dtos
 {
     public class UserDto
     {
+        public int IdPerson { get; set; }
         public int IdRole { get; set; }
         public int IdCity { get; set; }
         public string Address { get; set; } = string.Empty;

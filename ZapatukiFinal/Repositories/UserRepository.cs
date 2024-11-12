@@ -12,7 +12,8 @@ namespace ZapatukiFinal.Repositories
     {
         private readonly ZAPATUKIEntities11 _db;
 
-        public UserRepository() {
+        public UserRepository()
+        {
             _db = new ZAPATUKIEntities11();
         }
 
@@ -53,20 +54,39 @@ namespace ZapatukiFinal.Repositories
         {
             try
             {
-                    var person = _db.People.FirstOrDefault(p => p.Email == email);
-                    person.Password = newPassword;
-                    _db.SaveChanges();
-                    return true;
+                var person = _db.People.FirstOrDefault(p => p.Email == email);
+                person.Password = newPassword;
+                _db.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
                 return false;
             }
         }
-
         public bool validateDocument(string documentNumber, string email)
         {
-            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email);
+            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email); // Devuelve true si existe / si corresponde
+        }
+
+        public UserDto GetPersonByEmail(string email)
+        {
+            var person = _db.People.FirstOrDefault(p => p.Email == email);
+            if (person != null)
+            {
+                return new UserDto
+                {
+                    IdPerson = person.IdPerson,
+                    Address = person.Address,
+                    FirstName = person.FirstName,
+                    LastName = person.LastName,
+                    DocumentNumber = person.DocumentNumber,
+                    Phone = person.Phone,
+                    Email = person.Email,
+                    IdRole = person.IdRole
+                };
+            }
+            return null;
         }
     }
 }

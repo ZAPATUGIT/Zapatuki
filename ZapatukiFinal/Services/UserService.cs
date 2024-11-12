@@ -24,7 +24,10 @@ namespace ZapatukiFinal.Services
 
         public ResponseDto UserRegistration(UserDto userDto)
         {
-            PERSON pERSON = new PERSON
+            ResponseDto response = new ResponseDto();
+            try
+            {
+                PERSON pERSON = new PERSON
             {
                 IdCity = userDto.IdCity,
                 Address = userDto.Address,
@@ -36,9 +39,6 @@ namespace ZapatukiFinal.Services
                 Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password),
                 IdRole = userDto.IdRole
             };
-            ResponseDto response = new ResponseDto();
-            try
-            {
                 if (_userRepo.UserExists(userDto.Email))
                 {
                     response.type = 0;
@@ -65,80 +65,6 @@ namespace ZapatukiFinal.Services
                 response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
                 return response;
             }
-        }
-
-        public ResponseDto Login(UserDto userDto)
-        {
-            ResponseDto response = new ResponseDto();
-            try 
-            { 
-                if (!_userRepo.UserExists(userDto.Email))
-                {
-                    response.type = 0;
-                    response.message = "User doesn´t exist";
-                }
-                else
-                {
-                    bool isValidPassword = _userRepo.validatePassword(userDto.Email, userDto.Password);
-                    if (isValidPassword)
-                    {
-                        response.type = 1;
-                        response.message = "Login successfull";
-                    } else
-                    {
-                        response.type = 0;
-                        response.message = "Invalid Password";
-                    }
-                }
-                return response; 
-            }
-            catch (Exception e) {
-                response.type = 0;
-                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
-                return response;
-            }
-        }
-        public ResponseDto ForgetPassword(UserDto userDto)
-        {
-            ResponseDto response = new ResponseDto();
-            try
-            {
-                if (!_userRepo.validateDocument(userDto.DocumentNumber, userDto.Email))
-                {
-                    response.type = 0;
-                    response.message = "User doesn´t exist or data doesn´t correspond";
-                }
-                else
-                {
-                    if (userDto.NewPassword != userDto.ConfirmPassword)
-                    {
-                        response.type = 0;
-                        response.message = "Passwords do not match";
-                    }
-                    else
-                    {;
-                        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.NewPassword);
-                        bool updateResult = _userRepo.UpdatePassword(userDto.Email, hashedPassword);
-
-                        if (updateResult)
-                        {
-                            response.type = 1;
-                            response.message = "Password updated successfully";
-                        }
-                        else
-                        {
-                            response.type = 0;
-                            response.message = "Failed to update the password";
-                        }
-                    }
-                }
-                return response;
-            }
-            catch (Exception e) {
-                response.type = 0;
-                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
-                return response;
-                }
         }
     }
 }

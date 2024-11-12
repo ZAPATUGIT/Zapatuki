@@ -28,19 +28,22 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
-        
-        public ActionResult About()
+        public ActionResult Cart()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
+        //[HttpGet]
+        //public ActionResult Logout()
+        //{
+        //    return View();
+        //}
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult logout()
+        //{
+        //    Session["Userlogged"] = null;
+        //    Session.Abandon();
+        //    return Redirect ("Index, Home");
+        //}
     }
 }

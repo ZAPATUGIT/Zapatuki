@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>Cart</h2>
+
+@if (Session["UserLogged"] != null)
+    {
+        <div class="alert alert-success"> Successful Login </div>
+        <div class="alert alert-danger"> Agrega las cosas del carrito papito </div>
+    }
+    else
+        {
+            <div class="alert alert-danger"> You are not logged in to access the cart </div>
+        }
+    <button data-label="Login" class="rainbow-hover">
+        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+    </button>
+    <button data-label="BackToHome" class="rainbow-hover">
+        @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+    </button>
