@@ -11,7 +11,6 @@ namespace ZapatukiFinal.Dtos.ViewModels
     {
         public UserDto User { get; set; }
         public ResponseDto Response { get; set; }
-        public IEnumerable<DEPARTMENT> Departments { get; set; }
         public IEnumerable<CITY> Cities { get; set; }
     }
 }

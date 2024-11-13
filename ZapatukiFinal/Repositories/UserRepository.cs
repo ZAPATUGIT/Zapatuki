@@ -12,15 +12,28 @@ namespace ZapatukiFinal.Repositories
     {
         private readonly ZAPATUKIEntities11 _db;
 
+        public IEnumerable<CITY> GetCities()
+        {
+            try
+            {
+                return _db.CITies.ToList();
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores, puedes registrar el error o lanzar una excepción personalizada
+                Console.WriteLine(ex.Message);
+                return Enumerable.Empty<CITY>(); // Retorna una lista vacía en caso de error
+            }
+            return _db.CITies.ToList();
+
+            
+        }
         public UserRepository()
         {
             _db = new ZAPATUKIEntities11();
         }
 
-        public IEnumerable<CITY> GetCities()
-        {
-            return _db.CITies.ToList();
-        }
+        
 
         public bool UserRegistration(PERSON pERSON)
         {
@@ -88,5 +101,6 @@ namespace ZapatukiFinal.Repositories
             }
             return null;
         }
+
     }
 }

@@ -1,22 +1,38 @@
 ﻿@model ZapatukiFinal.Dtos.ViewModels.UserViewModel
 
 @{
-    ViewBag.Title = "Seller";
+    ViewBag.Title = "Administrator";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+
 <h2>Seller</h2>
-@if (Session["UserLogged"] != null)
+@if (Session["UserLogged"] == null)
 {
-    <div class="alert alert-success"> Successful Login </div>
-    <div class="alert alert-danger"> Agrega las cosas del carrito papito </div>
+    <div class="alert alert-danger">You are not logged</div>
+
+    <button data-label="Login" class="rainbow-hover">
+        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
+    </button>
 }
 else
 {
-    <div class="alert alert-danger"> You are not logged in to access the cart </div>
+    if (Model.User != null)
+    {
+        if (Model.User.IdRole == 2)
+        {
+            <div class="alert alert-success">Successful Login Admin</div>
+            <div class="alert alert-danger">Aquí podrás añadir productos</div>
+        }
+        else
+        {
+            <div class="alert alert-danger">You don´t have seller permissions to access</div>
+        }
+    }
 }
-<button data-label="Login" class="rainbow-hover">
-    @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
-</button>
 <button data-label="BackToHome" class="rainbow-hover">
     @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
 </button>
+
+<form action="@Url.Action("Logout", "Login")" method="post">
+    <button type="submit" class="rainbow-hover">Logout</button>
+</form>

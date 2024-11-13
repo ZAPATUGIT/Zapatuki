@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h2>Administrator</h2>
+<h2>Welcome Administrator @Model.User.FirstName</h2>
 @if (Session["UserLogged"] == null)
 {
     <div class="alert alert-danger">You are not logged</div>
@@ -16,9 +16,9 @@
 }
 else
 {
-    if (Model.Response != null && Model.Response.Data != null)
+    if (Model.User != null)
     {
-        if (Model.Response.Data.IdRole == 3)
+        if (Model.User.IdRole == 3)
         {
             <div class="alert alert-success">Successful Login Admin</div>
             <div class="alert alert-danger">Aquí podrás generar tus reportes</div>
@@ -32,3 +32,9 @@ else
 <button data-label="BackToHome" class="rainbow-hover">
     @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
 </button>
+
+<form action="@Url.Action("Logout", "Login")" method="post">
+    <button type="submit" class="rainbow-hover">Logout</button>
+</form>
+
+
