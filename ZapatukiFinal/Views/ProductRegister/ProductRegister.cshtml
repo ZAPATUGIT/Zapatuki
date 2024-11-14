@@ -1,0 +1,126 @@
+﻿@model ZapatukiFinal.Dtos.ViewModels.UserViewModel
+
+@{
+    ViewBag.Title = "ProductRegistration";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h2>ProductRegistration</h2>
+
+@if (Session["UserLogged"] == null)
+{
+    <div class="alert alert-danger">You are not logged</div>
+}
+
+<div class="card">
+    <div class="card2">
+        @using (Html.BeginForm("ProductRegister", "ProductRegister", FormMethod.Post, new { @class = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <p id="heading">Sign Up</p>
+
+            <div class="field">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="input-icon" viewBox="0 0 16 16">
+                    <path d="M8 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM8 8a6 6 0 0 0-6 6v1h12v-1a6 6 0 0 0-6-6z" />
+                </svg>
+                @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "input-field", placeholder = "First Name", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="input-icon" viewBox="0 0 16 16">
+                    <path d="M8 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM8 8a6 6 0 0 0-6 6v1h12v-1a6 6 0 0 0-6-6z" />
+                </svg>
+                @Html.EditorFor(model => model.Product.Brand, new { htmlAttributes = new { @class = "input-field", placeholder = "Last Name", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Brand, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="input-icon" viewBox="0 0 16 16">
+                    <path d="M2 0h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zM4 3h8v1H4V3zm0 3h8v1H4V6zm0 3h5v1H4V9z" />
+                </svg>
+                @Html.EditorFor(model => model.Product.Reference, new { htmlAttributes = new { @class = "input-field", placeholder = "I.D", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Reference, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg width="16px" height="16px" viewBox="0 0 0.48 0.48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <path d="M0.48 0v0.48H0V0zM0.252 0.465l0 0 -0.001 0.001 0 0 0 0 -0.001 -0.001q0 0 0 0l0 0 0 0.009 0 0 0 0 0.002 0.001 0 0 0 0 0.002 -0.001 0 0 0 0 0 -0.009q0 0 0 0m0.005 -0.002 0 0 -0.004 0.002 0 0 0 0 0 0.009 0 0 0 0 0.004 0.002q0 0 0.001 0l0 0 -0.001 -0.012q0 0 0 0m-0.014 0a0 0 0 0 0 -0.001 0l0 0 -0.001 0.012q0 0 0 0l0 0 0.004 -0.002 0 0 0 0 0 -0.009 0 0 0 0z" id="MingCute" fill-rule="nonzero" />
+                    <path d="M0.137 0.049C0.162 0.067 0.182 0.093 0.198 0.117l0.013 0.019A0.03 0.03 0 0 1 0.207 0.174l-0.027 0.027 0.003 0.006c0.007 0.014 0.019 0.035 0.037 0.053 0.014 0.014 0.029 0.024 0.042 0.032l0.007 0.004 0.007 0.003 0.003 0.001 0.027 -0.027a0.03 0.03 0 0 1 0.038 -0.003l0.02 0.014c0.023 0.016 0.047 0.035 0.066 0.059a0.029 0.029 0 0 1 0.004 0.03c-0.017 0.039 -0.059 0.072 -0.103 0.071l-0.006 0 -0.005 0 -0.005 -0.001 -0.006 -0.001 -0.006 -0.001 -0.007 -0.001 -0.007 -0.002 -0.007 -0.002 -0.008 -0.002 -0.008 -0.003c-0.037 -0.013 -0.084 -0.037 -0.132 -0.085s-0.073 -0.095 -0.085 -0.132l-0.003 -0.008 -0.002 -0.008 -0.002 -0.007 -0.002 -0.007a0.24 0.24 0 0 1 -0.001 -0.007l-0.001 -0.006 -0.001 -0.006 -0.001 -0.005 0 -0.005 0 -0.006c-0.002 -0.044 0.032 -0.087 0.071 -0.103a0.029 0.029 0 0 1 0.029 0.003M0.119 0.085c-0.021 0.011 -0.042 0.037 -0.041 0.062l0 0.007 0 0.004 0.001 0.005 0.001 0.005 0.001 0.006 0.001 0.006 0.002 0.006 0.002 0.007 0.002 0.007q0.001 0.004 0.003 0.007l0.003 0.008 0.004 0.008c0.013 0.028 0.033 0.06 0.067 0.093 0.033 0.033 0.066 0.054 0.093 0.067l0.008 0.004 0.008 0.003q0.004 0.001 0.007 0.003l0.007 0.002 0.007 0.002 0.006 0.002 0.006 0.001 0.006 0.001 0.005 0.001 0.005 0.001 0.004 0 0.007 0c0.025 0.001 0.051 -0.02 0.062 -0.041 -0.014 -0.017 -0.032 -0.03 -0.051 -0.044l-0.015 -0.01 -0.004 0.004 -0.008 0.009 -0.004 0.005c-0.012 0.012 -0.025 0.022 -0.042 0.015l-0.005 -0.002 -0.006 -0.002 -0.003 -0.001 -0.007 -0.003 -0.007 -0.004a0.238 0.238 0 0 1 -0.051 -0.038 0.238 0.238 0 0 1 -0.038 -0.051l-0.004 -0.007 -0.003 -0.007 -0.004 -0.009L0.14 0.21c-0.006 -0.015 0.002 -0.028 0.013 -0.04l0.004 -0.004 0.011 -0.01 0.004 -0.004 -0.009 -0.014c-0.014 -0.02 -0.028 -0.039 -0.045 -0.053m0.158 -0.009a0.02 0.02 0 0 1 0.026 -0.002l0.002 0.002L0.34 0.112l0.035 -0.035a0.02 0.02 0 0 1 0.03 0.026l-0.002 0.002L0.368 0.14l0.035 0.035a0.02 0.02 0 0 1 -0.026 0.03l-0.002 -0.002L0.34 0.168l-0.035 0.035a0.02 0.02 0 0 1 -0.03 -0.026l0.002 -0.002L0.312 0.14l-0.035 -0.035a0.02 0.02 0 0 1 0 -0.028" fill="#00ffc8" />
+                </svg>
+                @Html.EditorFor(model => model.Product.Color, new { htmlAttributes = new { @class = "input-field", placeholder = "Phone Number", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Color, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
+                    <g><path d="M15.538 7.538h-1.23C14.082 4.418 11.582 1.918 8.462 1.692V0.462c0 -0.255 -0.207 -0.462 -0.462 -0.462s-0.462 0.207 -0.462 0.462v1.23C4.418 1.918 1.918 4.418 1.692 7.538H0.462c-0.255 0 -0.462 0.207 -0.462 0.462s0.207 0.462 0.462 0.462h1.23C1.918 11.582 4.418 14.082 7.538 14.308V15.538c0 0.255 0.207 0.462 0.462 0.462s0.462 -0.207 0.462 -0.462v-1.23c3.121 -0.226 5.62 -2.726 5.847 -5.847H15.538c0.255 0 0.462 -0.207 0.462 -0.462s-0.207 -0.462 -0.462 -0.462M8.462 13.382v-1.194c0 -0.255 -0.207 -0.462 -0.462 -0.462s-0.462 0.207 -0.462 0.462v1.194c-2.611 -0.222 -4.698 -2.309 -4.921 -4.921h1.194c0.255 0 0.462 -0.207 0.462 -0.462s-0.207 -0.462 -0.462 -0.462H2.618C2.84 4.927 4.927 2.84 7.538 2.618v1.194c0 0.255 0.207 0.462 0.462 0.462s0.462 -0.207 0.462 -0.462V2.618c2.611 0.222 4.698 2.309 4.921 4.921h-1.194c-0.255 0 -0.462 0.207 -0.462 0.462s0.207 0.462 0.462 0.462h1.194c-0.222 2.611 -2.309 4.698 -4.921 4.921" /><path d="M9.4 6.6a0.462 0.462 0 0 0 -0.653 0L8 7.347l-0.748 -0.748a0.462 0.462 0 0 0 -0.653 0 0.462 0.462 0 0 0 0 0.653L7.347 8l-0.748 0.748a0.462 0.462 0 0 0 0.326 0.788 0.461 0.461 0 0 0 0.326 -0.135L8 8.653l0.748 0.748c0.09 0.09 0.208 0.135 0.326 0.135s0.236 -0.045 0.326 -0.135a0.462 0.462 0 0 0 0 -0.653L8.653 8l0.748 -0.748a0.462 0.462 0 0 0 0 -0.653" /></g>
+                </svg>
+                @Html.EditorFor(model => model.Product.Size, new { htmlAttributes = new { @class = "input-field", placeholder = "Address", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Size, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
+                    <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
+                </svg>
+                @Html.EditorFor(model => model.Product.Description, new { htmlAttributes = new { @class = "input-field", placeholder = "Mail", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Product.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+                </svg>
+                @Html.EditorFor(model => model.Product.Stock, new { htmlAttributes = new { @class = "input-field", placeholder = "Password", type = "password" } })
+                @Html.ValidationMessageFor(model => model.Product.Stock, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="field">
+                <svg viewBox="0 0 16 16" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg" class="input-icon">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+                </svg>
+                @Html.EditorFor(model => model.Product.Price, new { htmlAttributes = new { @class = "input-field", placeholder = "Password", type = "password" } })
+                @Html.ValidationMessageFor(model => model.Product.Price, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="productTypeSelect">Select product type:</label>
+                <select id="productTypeSelect" name="Product.IdProductType" class="form-control">
+                    <option value="">Select product type:</option>
+                    @foreach (var type in Model.Types)
+                    {
+                        <option value="@type.IdProductType" @(Model.Product.IdProductType == type.IdProductType ? "selected" : "")>
+                            @type.NameProductType
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="supplierSelect">select supplier:</label>
+                <select id="supplierSelect" name="Product.IdSupplier" class="form-control">
+                    <option value="">Select supplier:</option>
+                    @foreach (var supplier in Model.Suppliers)
+                    {
+                        <option value="@supplier.IdSupplier" @(Model.Product.IdSupplier == supplier.IdSupplier ? "selected" : "")>
+                            @supplier.NameSupplier
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="btn">
+                <button type="submit" class="button1">Create Product</button>
+                <button class="button1">@Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</button>
+            </div>
+        }
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Response.message))
+{
+    <div class="alert alert-danger">
+        @Model.Response.message
+    </div>
+}

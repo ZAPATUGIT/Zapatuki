@@ -9,10 +9,6 @@
 @if (Session["UserLogged"] == null)
 {
     <div class="alert alert-danger">You are not logged</div>
-
-    <button data-label="Login" class="rainbow-hover">
-        @Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })
-    </button>
 }
 else
 {
@@ -20,8 +16,10 @@ else
     {
         if (Model.User.IdRole == 2)
         {
-            <div class="alert alert-success">Successful Login Admin</div>
-            <div class="alert alert-danger">Aquí podrás añadir productos</div>
+            <div class="alert alert-success">Successful Login Seller @Model.User.FirstName</div>
+            <button data-label="BackToHome" class="rainbow-hover">
+                @Html.ActionLink("Product Registration", "ProductRegister", "ProductRegister", new { area = "" }, new { @class = "nav-link" })
+            </button>
         }
         else
         {

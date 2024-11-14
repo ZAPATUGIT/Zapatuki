@@ -57,7 +57,7 @@ namespace ZapatukiFinal.Controllers
                 var response = new ResponseDto
                 {
                     type = 0,
-                    message = ex.Message
+                    message = "Unhandled error, please reload the page"
                 };
                 return CreateUserViewModel(user, response);
             }

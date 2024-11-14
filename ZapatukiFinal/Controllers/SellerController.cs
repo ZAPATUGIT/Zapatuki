@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ZapatukiFinal.Dtos.ViewModels;
 using ZapatukiFinal.Dtos;
+using ZapatukiFinal.Services;
 
 namespace ZapatukiFinal.Controllers
 {
     public class SellerController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-        [HttpGet]
+
+    [HttpGet]
         public ActionResult Seller()
         {
             var userLogged = Session["UserLogged"] as ResponseDto;
@@ -23,7 +19,6 @@ namespace ZapatukiFinal.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-
             var viewModel = new UserViewModel
             {
                 User = userLogged.Data,
