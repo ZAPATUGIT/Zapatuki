@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ZapatukiFinal.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -37,7 +39,7 @@ namespace ZapatukiFinal.Controllers
         {
             return View();
         }
-        
+
 
         //[HttpGet]
         //public ActionResult Logout()
@@ -52,5 +54,8 @@ namespace ZapatukiFinal.Controllers
         //    Session.Abandon();
         //    return Redirect ("Index, Home");
         //}
+        public ActionResult Print() {
+            return new ActionAsPdf("Index", new { nombre = "Hola" }) { FileName = "Hola.pdf" };
+        }
     }
 }
