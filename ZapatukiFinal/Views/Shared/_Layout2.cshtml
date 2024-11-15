@@ -8,41 +8,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET Master 2</title>
+    <title>@ViewBag.Title - Zapatuki</title>
+    <link href="~/Content/Login.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        .navbar-nav li {
-            margin-right: 10px; /* Espacio entre los elementos de la lista */
-        }
-
-        .search-container {
-            position: relative;
-        }
-
-        .search-bar {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            color: #ccc;
-        }
-    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container text-dark">
-            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="heading">
                 <img src="~/wwwroot/images/logozapatuki.png" alt="Zapatuki" style="height: 120px;" />
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
@@ -55,7 +29,9 @@
                     <li class="nav-item">@Html.ActionLink("Offers", "Offers", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Shopping cart", "Cart", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })</li>
-                    </li>
+                    <li class="nav-item">@Html.ActionLink("Administrator", "Administrator", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Seller", "Seller", "Seller", new { area = "" }, new { @class = "nav-link" })</li>
+
                 </ul>
             </div>
         </div>

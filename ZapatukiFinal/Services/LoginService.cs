@@ -5,15 +5,16 @@ using System.Web;
 using ZapatukiFinal.Dtos;
 using ZapatukiFinal.Dtos.ViewModels;
 using ZapatukiFinal.Repositories;
+using ZapatukiFinal.Utilities;
 
 namespace ZapatukiFinal.Services
 {
     public class LoginService
     {
-        private readonly UserRepository _userRepo;
+        private readonly UserRepository _loginRepo;
         public LoginService()
         {
-            _userRepo = new UserRepository();
+            _loginRepo = new UserRepository();
         }
 
         public ResponseDto Login(UserDto user)
@@ -21,22 +22,22 @@ namespace ZapatukiFinal.Services
             ResponseDto response = new ResponseDto();
             try
             {
-                if (!_userRepo.UserExists(user.Email))
+                if (!_loginRepo.UserExists(user.Email))
                 {
                     response.type = 0;
                     response.message = "User doesn´t exist";
                 }
                 else
                 {
-                    var userData = _userRepo.GetPersonByEmail(user.Email);
-                    if (_userRepo.validatePassword(user.Email, user.Password))
+                    UserDto userData = _loginRepo.GetPersonByEmail(user.Email);
+                    if (_loginRepo.validatePassword(user.Email, user.Password))
                     {
                         response.Data = userData;
                         response.type = 1;
-                        response.message = "Login successfull";
+                        response.message = "User logged";
                     }
                     else
-                    {
+                    {   
                         response.type = 0;
                         response.message = "Invalid Password";
                     }
@@ -46,7 +47,7 @@ namespace ZapatukiFinal.Services
             catch (Exception e)
             {
                 response.type = 0;
-                response.message = e.InnerException != null ? e.InnerException.ToString() : e.Message;
+                response.message = "Unhandled error, please reload the page";
                 return response;
             }
         }
@@ -56,7 +57,7 @@ namespace ZapatukiFinal.Services
             ResponseDto response = new ResponseDto();
             try
             {
-                if (!_userRepo.validateDocument(userDto.DocumentNumber, userDto.Email))
+                if (!_loginRepo.validateDocument(userDto.DocumentNumber, userDto.Email))
                 {
                     response.type = 0;
                     response.message = "User doesn´t exist or data doesn´t correspond";
@@ -72,7 +73,7 @@ namespace ZapatukiFinal.Services
                     {
                         ;
                         string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userDto.NewPassword);
-                        bool updateResult = _userRepo.UpdatePassword(userDto.Email, hashedPassword);
+                        bool updateResult = _loginRepo.UpdatePassword(userDto.Email, hashedPassword);
 
                         if (updateResult)
                         {
@@ -96,9 +97,5 @@ namespace ZapatukiFinal.Services
             }
         }
 
-        internal ResponseDto Login(UserViewModel userViewModel)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

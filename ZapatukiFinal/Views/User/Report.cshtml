@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = null;
+}
+
+<h2>Report</h2>
+
+<div>
+    <html>
+    <body style='font-family: Arial, sans-serif; background-color: #f0f8ff; padding: 20px;'>
+        <div style='border: 1px solid #40e0d0; border-radius: 10px; padding: 15px;'>
+            <h2 style='color: #40e0d0;'>User Details Notification</h2>
+            <p style='color: #333;'>Notificación de registro en Zapatuki <b>No responder a este correo.</b></p>
+            <ol style='color: #40e0d0;'>
+                <li>Address: {User.Address}</li>
+                <li>First Name: {user.FirstName}</li>
+                <li>Last Name: {user.LastName}</li>
+                <li>Document Number: {user.DocumentNumber}</li>
+                <li>Phone: {user.Phone}</li>
+                <li>Email: {user.Email}</li>
+            </ol>
+            <p style='color: #40e0d0;'>Gracias por usar nuestro servicio.</p>
+        </div>
+    </body>
+    </html>
+</div>

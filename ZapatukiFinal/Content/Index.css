@@ -1,0 +1,384 @@
+﻿body {
+    background-color: #171717; /* Establece el color de fondo en negro */
+    color: white; /* Cambia el color del texto a blanco para que sea legible */
+}
+
+/*Banner movil*/
+.banner {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Aumenta esto según tus necesidades */
+    height: 700px; /* Ajusta la altura según tus necesidades */
+    overflow: hidden;
+    margin: 0 auto; /* Centra el banner en la página */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%; /* Asegura que cada slide ocupe toda la altura del banner */
+}
+
+img {
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
+    object-fit: contain; /* Asegura que la imagen se ajuste sin recortarse */
+    display: block; /* Evita el espacio extra debajo de la imagen */
+}
+
+/* Ocultar los inputs */
+input[type="radio"] {
+    display: none;
+}
+
+/* Animación del slider */
+#slide1:checked ~ .slides {
+    transform: translateX(0);
+}
+
+#slide2:checked ~ .slides {
+    transform: translateX(-100%);
+}
+
+#slide3:checked ~ .slides {
+    transform: translateX(-200%);
+}
+
+/* Navegación */
+.navigation {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+    .navigation label {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+/* Animación automática */
+@keyframes autoSlide {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-100%);
+    }
+
+    45% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(-200%);
+    }
+
+    70% {
+        transform: translateX(-200%);
+    }
+
+    75% {
+        transform: translateX(0);
+    }
+    /* Regresa al inicio suavemente */
+    100% {
+        transform: translateX(0);
+    }
+    /* Mantiene el inicio */
+}
+
+/* Aplicar animación automática a las imágenes */
+.slides {
+    animation: autoSlide 15s infinite; /* 5 segundos por imagen */
+}
+
+/*TARJETA*/
+.parent {
+    display: flex; /* Alinea las cartas en una fila */
+    justify-content: space-between; /* Espacio entre las cartas */
+    flex-wrap: wrap; /* Permite que las cartas se ajusten a la siguiente línea si no hay suficiente espacio */
+    margin: 20px; /* Espacio alrededor del contenedor */
+    display: inline-block;
+}
+
+.card {
+    height: 300px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);
+    transition: all 0.5s ease-in-out;
+    transform-style: preserve-3d;
+    box-shadow: rgba(5, 71, 17, 0) 40px 50px 25px -40px, rgba(5, 71, 17, 0.2) 0px 25px 25px -5px;
+}
+
+.glass {
+    transform-style: preserve-3d;
+    position: absolute;
+    inset: 8px;
+    border-radius: 55px;
+    border-top-right-radius: 100%;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815) 100%);
+    /* -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px); */
+    transform: translate3d(0px, 0px, 25px);
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
+    transition: all 0.5s ease-in-out;
+}
+
+.content {
+    padding: 100px 60px 0px 30px;
+    transform: translate3d(0, 0, 26px);
+}
+
+    .content .title {
+        display: block;
+        color: #00894d;
+        font-weight: 900;
+        font-size: 20px;
+    }
+
+    .content .text {
+        display: block;
+        color: rgba(0, 137, 78, 0.7647058824);
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+.bottom {
+    padding: 10px 12px;
+    transform-style: preserve-3d;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translate3d(0, 0, 26px);
+}
+
+    .bottom .view-more {
+        display: flex;
+        align-items: center;
+        width: 40%;
+        justify-content: flex-end;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .bottom .view-more:hover {
+            transform: translate3d(0, 0, 10px);
+        }
+
+        .bottom .view-more .view-more-button {
+            background: none;
+            border: none;
+            color: #00c37b;
+            font-weight: bolder;
+            font-size: 12px;
+        }
+
+        .bottom .view-more .svg {
+            fill: none;
+            stroke: #00c37b;
+            stroke-width: 3px;
+            max-height: 15px;
+        }
+
+    .bottom .social-buttons-container {
+        display: flex;
+        gap: 10px;
+        transform-style: preserve-3d;
+    }
+
+        .bottom .social-buttons-container .social-button {
+            width: 30px;
+            aspect-ratio: 1;
+            padding: 5px;
+            background: rgb(255, 255, 255);
+            border-radius: 50%;
+            border: none;
+            display: grid;
+            place-content: center;
+            box-shadow: rgba(5, 71, 17, 0.5) 0px 7px 5px -5px;
+        }
+
+            .bottom .social-buttons-container .social-button:first-child {
+                transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;
+            }
+
+            .bottom .social-buttons-container .social-button:nth-child(2) {
+                transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;
+            }
+
+            .bottom .social-buttons-container .social-button:nth-child(3) {
+                transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;
+            }
+
+            .bottom .social-buttons-container .social-button .svg {
+                width: 15px;
+                fill: #00894d;
+            }
+
+            .bottom .social-buttons-container .social-button:hover {
+                background: black;
+            }
+
+                .bottom .social-buttons-container .social-button:hover .svg {
+                    fill: white;
+                }
+
+            .bottom .social-buttons-container .social-button:active {
+                background: rgb(255, 234, 0);
+            }
+
+                .bottom .social-buttons-container .social-button:active .svg {
+                    fill: black;
+                }
+
+.logo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-style: preserve-3d;
+}
+
+    .logo .circle {
+        display: block;
+        position: absolute;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        top: 0;
+        right: 0;
+        box-shadow: rgba(100, 100, 111, 0.2) -10px 10px 20px 0px;
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        background: rgba(0, 249, 203, 0.2);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .logo .circle1 {
+        width: 170px;
+        transform: translate3d(0, 0, 20px);
+        top: 8px;
+        right: 8px;
+    }
+
+    .logo .circle2 {
+        width: 140px;
+        transform: translate3d(0, 0, 40px);
+        top: 10px;
+        right: 10px;
+        -webkit-backdrop-filter: blur(1px);
+        backdrop-filter: blur(1px);
+        transition-delay: 0.4s;
+    }
+
+    .logo .circle3 {
+        width: 110px;
+        transform: translate3d(0, 0, 60px);
+        top: 17px;
+        right: 17px;
+        transition-delay: 0.8s;
+    }
+
+    .logo .circle4 {
+        width: 80px;
+        transform: translate3d(0, 0, 80px);
+        top: 23px;
+        right: 23px;
+        transition-delay: 1.2s;
+    }
+
+    .logo .circle5 {
+        width: 50px;
+        transform: translate3d(0, 0, 100px);
+        top: 30px;
+        right: 30px;
+        display: grid;
+        place-content: center;
+        transition-delay: 1.6s;
+    }
+
+        .logo .circle5 .svg {
+            width: 20px;
+            fill: white;
+        }
+
+.parent:hover .card {
+    transform: rotate3d(1, 1, 0, 30deg);
+    box-shadow: rgba(5, 71, 17, 0.3) 30px 50px 25px -40px, rgba(5, 71, 17, 0.1) 0px 25px 30px 0px;
+}
+
+    .parent:hover .card .bottom .social-buttons-container .social-button {
+        transform: translate3d(0, 0, 50px);
+        box-shadow: rgba(5, 71, 17, 0.2) -5px 20px 10px 0px;
+    }
+
+    .parent:hover .card .logo .circle2 {
+        transform: translate3d(0, 0, 60px);
+    }
+
+    .parent:hover .card .logo .circle3 {
+        transform: translate3d(0, 0, 80px);
+    }
+
+    .parent:hover .card .logo .circle4 {
+        transform: translate3d(0, 0, 100px);
+    }
+
+    .parent:hover .card .logo .circle5 {
+        transform: translate3d(0, 0, 120px);
+    }
+/*BOTON*/
+/* From Uiverse.io by nikk7007 */
+button {
+    padding: 0.8em 1.8em;
+    border: 2px solid #17C3B2;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: .3s;
+    z-index: 1;
+    font-family: inherit;
+    color: #17C3B2;
+}
+
+    button::before {
+        content: '';
+        width: 0;
+        height: 300%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background: #17C3B2;
+        transition: .5s ease;
+        display: block;
+        z-index: -1;
+    }
+
+    button:hover::before {
+        width: 105%;
+    }
+
+    button:hover {
+        color: #111;
+    }

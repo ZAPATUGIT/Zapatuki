@@ -9,9 +9,9 @@ namespace ZapatukiFinal.Dtos
     public class ResponseDto
     {
         public int? IdCity { get; set; }
-        public IEnumerable<CITY> Cities { get; set; } // Lista de ciudades según el departamento seleccionado
         public int type {  get; set; }
         public string message { get; set; }
         public UserDto Data { get; set; }
+        public ProductDto Datapro { get; set; }
     }
 }

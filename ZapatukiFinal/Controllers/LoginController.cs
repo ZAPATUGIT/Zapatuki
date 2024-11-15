@@ -32,10 +32,16 @@ namespace ZapatukiFinal.Controllers
             try
             {
                 ResponseDto response = _loginService.Login(user);
-
+                
                 if (response.type == 1)
                 {
-                    Session["UserLogged"] = response.Data;
+                    var responseLog = new ResponseDto
+                    {
+                        Data = response.Data
+                    };
+
+                    Session["UserLogged"] = responseLog;
+
                     switch (response.Data.IdRole)
                     {
                         case 1:
@@ -72,6 +78,7 @@ namespace ZapatukiFinal.Controllers
             };
             return View(viewModel);
         }
+
 
 
 
@@ -123,84 +130,16 @@ namespace ZapatukiFinal.Controllers
         }
 
 
-
-    [HttpGet]
-        public ActionResult Administrator()
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = new ResponseDto(),
-            };
-            return View(viewModel);
-        }
-
     [HttpPost]
-        public ActionResult Admiistrator()
+        public ActionResult Logout()
         {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = new ResponseDto()
-                {
-                    type = 1,
-                    message = "Welcome to the admin section",
-                    Data = new UserDto()
-                }
-            };
-            return View(viewModel);
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Login");
         }
-        private ActionResult createAdminViewModel(UserDto user, ResponseDto response)
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = response ?? new ResponseDto()
-            };
-            return View(viewModel);
-        }
-
 
 
     [HttpGet]
-        public ActionResult Seller()
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = new ResponseDto(),
-            };
-            return View(viewModel); // Asegúrate de que este objeto no sea null
-        }
-
-    [HttpPost]
-        public ActionResult Selller()
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = new ResponseDto()
-                {
-                    type = 1,
-                    message = "Welcome to the admin section",
-                    Data = new UserDto()
-                }
-            };
-            return View(viewModel);
-        }
-        private ActionResult createSellerViewModel(UserDto user, ResponseDto response)
-        {
-            var viewModel = new UserViewModel
-            {
-                User = new UserDto(),
-                Response = response ?? new ResponseDto()
-            };
-            return View(viewModel);
-        }
-
-
-
-        [HttpGet]
         public ActionResult Cart()
         {
             UserDto user = Session["UserLogged"] as UserDto;
