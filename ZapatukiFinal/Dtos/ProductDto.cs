@@ -19,5 +19,15 @@ namespace ZapatukiFinal.Dtos
         public string Description { get; set; }
         public int Stock { get; set; }
         public float Price { get; set; }
+
+        public int NewIdProductType { get; set; }
+        public int NewIdSupplier { get; set; }
+        public string NewName { get; set; }
+        public string NewBrand { get; set; }
+        public string NewColor { get; set; }
+        public string NewSize { get; set; }
+        public string NewDescription { get; set; }
+        public int NewStock { get; set; }
+        public float NewPrice { get; set; }
     }
 }

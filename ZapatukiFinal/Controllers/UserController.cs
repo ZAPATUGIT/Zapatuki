@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using ZapatukiFinal.Dtos;
@@ -73,6 +74,14 @@ namespace ZapatukiFinal.Controllers
             };
 
             return View(viewModel);
+        }
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Report") { FileName = "Alerta Inicio de Sesion.pdf" };
+        }
+        public ActionResult Report(UserDto user)
+        {
+            return View(user);
         }
     }
 }

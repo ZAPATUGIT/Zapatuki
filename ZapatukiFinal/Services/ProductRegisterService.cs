@@ -43,7 +43,7 @@ namespace ZapatukiFinal.Services
                     Stock = ProductDto.Stock,
                     Price = ProductDto.Price
                 };
-                if (_productRepo.ProductExists(ProductDto.Name, ProductDto.Color))
+                if (_productRepo.ProductExists(ProductDto.Name, ProductDto.Size, ProductDto.Color))
                 {
                     response.type = 0;
                     response.message = "Product exist";
