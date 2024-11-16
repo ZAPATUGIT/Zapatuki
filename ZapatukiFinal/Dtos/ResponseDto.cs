@@ -12,6 +12,5 @@ namespace ZapatukiFinal.Dtos
         public int type {  get; set; }
         public string message { get; set; }
         public UserDto Data { get; set; }
-        public ProductDto Datapro { get; set; }
     }
 }

@@ -5,8 +5,6 @@ using ZapatukiFinal.Repositories.Models;
 using BCrypt.Net;
 using System.Web.Helpers;
 using ZapatukiFinal.Dtos;
-using ZapatukiFinal.Utilities;
-using System.Data.SqlClient;
 
 namespace ZapatukiFinal.Repositories
 {
@@ -74,17 +72,13 @@ namespace ZapatukiFinal.Repositories
             }
             return null;
         }
+
+
+        // Renovar contraseña
         public bool validatePassword(string email, string password)
         {
             PERSON user = _db.People.FirstOrDefault(u => u.Email == email);
             return BCrypt.Net.BCrypt.Verify(password, user.Password);
-        }
-
-
-        // Renovar contraseña
-        public bool validateDocument(string documentNumber, string email)
-        {
-            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email); // Devuelve true si existe / si corresponde
         }
         public bool UpdatePassword(string email, string newPassword)
         {
@@ -100,6 +94,11 @@ namespace ZapatukiFinal.Repositories
                 return false;
             }
         }
+        public bool validateDocument(string documentNumber, string email)
+        {
+            return _db.People.Any(u => u.DocumentNumber == documentNumber && u.Email == email); // Devuelve true si existe / si corresponde
+        }
+
 
 
         //Registro productos
@@ -127,6 +126,10 @@ namespace ZapatukiFinal.Repositories
                 return Enumerable.Empty<SUPPLIER>(); // Retorna una lista vacía en caso de error
             }
         }
+        public bool ProductExists(string name, string color)
+        {
+            return _db.PRODUCTs.Any(u => u.Name == name && u.Color == color);
+        }
         public bool ProductRegistration(PRODUCT pRODUCT)
         {
             try
@@ -144,101 +147,6 @@ namespace ZapatukiFinal.Repositories
             }
         }
 
-        //validacion producto
-        public bool ProductExists(string name, string size, string color)
-        {
-            return _db.PRODUCTs.Any(p => p.Name == name && p.Size == size && p.Color == color);
-        }
 
-
-        //Actualizar
-        public ProductDto GetProdcutByName(string name, string size, string color)
-        {
-            var product = _db.PRODUCTs.FirstOrDefault(p => p.Name == name && p.Size == size && p.Color == color);
-            if (product != null)
-            {
-                return new ProductDto
-                {
-                    IdProduct = product.IdProduct,
-                    IdProductType = product.IdProductType,
-                    IdSupplier = product.IdProduct,
-                    Name = product.Name,
-                    Brand = product.Brand,
-                    Reference = product.Reference,
-                    Color = product.Color,
-                    Size = product.Size,
-                    Description = product.Description,
-                    Stock = product.Stock,
-                    Price = (float)product.Price
-                };
-            }
-            return null;
-        }
-
-        public bool UpdateProduct(
-                string reference, int NewIdProductType, int NewIdSupplier, string NewName, string NewBrand, string NewColor,
-                string NewSize, string NewDescription, int NewStock, float NewPrice
-                )
-        {
-            try
-            {
-                var product = _db.PRODUCTs.FirstOrDefault(p => p.Reference == reference);
-                if (product != null)
-                    product.IdProductType = NewIdProductType;
-                product.IdSupplier = NewIdSupplier;
-                product.Name = NewName;
-                product.Brand = NewBrand;
-                product.Reference = reference;
-                product.Color = NewColor;
-                product.Size = NewSize;
-                product.Description = NewDescription;
-                product.Stock = NewStock;
-                product.Price = (float)NewPrice;
-
-                _db.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
-        //Delete por correo, solo el admin puede
-        public ResponseDto DeletePersonByEmail(string email)
-        {
-            try
-            {
-                // Ejecutar el stored procedure para eliminar a la persona
-                int rowsAffected = _db.Database.ExecuteSqlCommand("EXEC DeletePersonByEmail @Email",
-                    new SqlParameter("@Email", email));
-
-                if (rowsAffected > 0)
-                {
-                    return new ResponseDto
-                    {
-                        type = 1,
-                        message = "User Deleted succesfull."
-                    };
-                }
-                else
-                {
-                    return new ResponseDto
-                    {
-                        type = 0,
-                        message = "User doesn´t exist"
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar la excepción
-                return new ResponseDto
-                {
-                    type = 0,
-                    message = "Delete error"
-                };
-            }
-        }
     }
 }

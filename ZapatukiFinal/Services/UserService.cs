@@ -1,13 +1,8 @@
-﻿using Rotativa;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net.Mail;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using ZapatukiFinal.Controllers;
 using ZapatukiFinal.Dtos;
 using ZapatukiFinal.Repositories;
 using ZapatukiFinal.Repositories.Models;
@@ -61,7 +56,7 @@ namespace ZapatukiFinal.Services
                     else
                     {
                         response.type = 0;
-                        response.message = "One or more fields are wrong, Verify";
+                        response.message = "Something goes wrong";
                     }
                 }
                 return response;
@@ -73,20 +68,11 @@ namespace ZapatukiFinal.Services
                 return response;
             }
         }
-        //public string Print(UserDto user)
-        //{
-        //    var filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/ArchivosPDF"), $"User Details_{user.Email}.pdf");
-        //    var pdfResult = new Rotativa.ViewAsPdf("Report"); // Reemplaza con el nombre de tu vista
-        //    var pdfBytes = pdfResult.BuildFile("Report");
-        //    System.IO.File.WriteAllBytes(filePath, pdfBytes);
-        //    return filePath;
-        //}
         private void SendUserDetailsEmail(UserDto user)
         {
             Email emailManager = new Email();
 
-            //string addressee = user.Email;
-            string addressee = "davidtorrado1402@gmail.com";
+            string addressee = user.Email;
             string affair = "User Details Notification";
             string message = $@"
                            <html>
@@ -106,14 +92,6 @@ namespace ZapatukiFinal.Services
                                     </div>
                                 </body>
                             </html>";
-            
-            //var pdfPath = Print(user);
-
-            // Adjuntar el archivo PDF
-            //var attachment = new Attachment(pdfPath);
-
-            ;
-            
             emailManager.SendEmail(addressee, affair, message, true);
         }
     }
